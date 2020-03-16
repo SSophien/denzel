@@ -1,0 +1,1 @@
+mongoimport --host  denzel-shard-00-02-pg8sh.gcp.mongodb.net:27017 --db data --collection movies --type json --file "C:/Users/ss180994/Documents/Web Application Architectures/denzel/server/denzel.json" --jsonArray --authenticationDatabase admin --ssl --username exa --drop
