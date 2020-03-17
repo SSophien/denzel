@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "The must-watch Denzel's movies",
   "scripts": {
-	"start:lambda": "./node_modules/.bin/netlify-lambda serve ./",
-	"build:lambda": "./node_modules/.bin/netlify-lambda build ./"
+    "start:lambda": "./node_modules/.bin/netlify-lambda serve ./",
+    "build:lambda": "./node_modules/.bin/netlify-lambda build ./"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -20,6 +20,7 @@
     "netlify-lambda": "^1.6.3",
     "p-limit": "^2.2.2",
     "p-settle": "^4.0.0",
+    "query-string": "^6.11.1",
     "serverless-http": "^2.3.2"
   },
   "devDependencies": {
