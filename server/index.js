@@ -1,5 +1,7 @@
 const cors = require('cors');
 const express = require('express');
+const serverless = require('serverless-http');
+
 const helmet = require('helmet');
 const {PORT} = require('./constants');
 const queryString = require('query-string');
@@ -11,6 +13,7 @@ const collectionName = "movies";
 const DENZEL_IMDB_ID = "nm0000243";
 
 const app = express();
+const router = express.Router();
 
 module.exports = app;
 
@@ -20,12 +23,12 @@ app.use(helmet());
 
 app.options('*', cors());
 
-app.get('/', (request, response) => {
-  response.send({'ack': true});
+router.get('/', (request, response) => {
+	response.json({'hello':'hi!'});
 });
 
 db.initialize(dbName, collectionName, function(dbCollection) {
-	app.get('/movies/populate/' + DENZEL_IMDB_ID, (request, response) => {
+	router.get('/movies/populate/' + DENZEL_IMDB_ID, (request, response) => {
 		// return full list
 		dbCollection.find().toArray((error, result) => {
 			if (error) throw error;
@@ -33,7 +36,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
 		});
 	});
 	
-	app.get('/movies', (request, response) => {
+	router.get('/movies', (request, response) => {
 		// return random must-watch movie
 		var query = {"metascore":{$gte:70}};
 		
@@ -46,7 +49,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
 		});
 	});	
 		
-	app.get('/movies/search', (request, response) => {
+	router.get('/movies/search', (request, response) => {
 		//get the id from params & return the movie corresponding
 		let limit = parseInt(request.query.limit, 10);
 		let metascore = parseInt(request.query.metascore, 10);
@@ -60,7 +63,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
 		});
 	});
 	
-	app.put('/movies/:id', (request, response) => {
+	router.put('/movies/:id', (request, response) => {
 		const itemId = request.params.id;
 		const item = request.body;
 		console.log("Editing item: ", itemId, " to be ", item);
@@ -74,7 +77,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
 		});
 	});
 	
-	app.get('/movies/:id', (request, response) => {
+	router.get('/movies/:id', (request, response) => {
 		//get the id from params & return the movie corresponding
 		const itemId = request.params.id;
 		dbCollection.findOne({id: itemId}, (error, result) => {
@@ -88,8 +91,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
 	throw (err);
 });
 
-
-
+app.use('/.netlify/functions/api', router);
 
 app.listen(PORT);
 console.log(`📡 Running on port ${PORT}`);

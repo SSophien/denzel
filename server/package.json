@@ -2,6 +2,10 @@
   "name": "denzel",
   "version": "0.0.1",
   "description": "The must-watch Denzel's movies",
+  "scripts": { 
+	"start": "./node_modules/.bin/netlify-lambda serve",
+	"build": "./node_modules/.bin/netlify-lambda build"
+  },
   "dependencies": {
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
@@ -13,7 +17,8 @@
     "mongodb": "^3.5.5",
     "mongoimport": "^1.0.6",
     "p-limit": "^2.2.2",
-    "p-settle": "^4.0.0"
+    "p-settle": "^4.0.0",
+    "serverless-http": "^2.3.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
