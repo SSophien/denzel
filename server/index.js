@@ -91,7 +91,7 @@ db.initialize(dbName, collectionName, function(dbCollection) {
 	throw (err);
 });
 
-app.use('/.netlify/functions/api', router);
+app.use('/.netlify/functions/index', router);
 
 app.listen(PORT);
 console.log(`📡 Running on port ${PORT}`);
