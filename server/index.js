@@ -18,6 +18,11 @@ app.use(cors());
 app.use(helmet());
 
 app.options('*', cors());
+
+app.get('/', (request, response) => {
+		response.send('OK');
+});
+	
 const dbName = "denzel-webapp";
 const dbCollectionName = "movies";
 db.initialize(dbName, dbCollectionName, function(dbCollection) {

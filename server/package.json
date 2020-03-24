@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "The must-watch Denzel's movies",
   "scripts": {
-    "start": "node ./server/index.js"
+    "start": "node ./index.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
